@@ -20,7 +20,7 @@ const update = async (id, entries) => {
 const remove = async (id) => {
   const task = await TasksModel.findById(id);
   if (!task) return notFound('Task does not exist');
-  return TasksModel.remove(id);
+  TasksModel.remove(id);
 };
 
 module.exports = { findAll, findById, create, update, remove };
