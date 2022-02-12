@@ -1,7 +1,7 @@
-const mainRoutes = require('express').Router({ mergeParams: true });
+const MainRoutes = require('express').Router({ mergeParams: true });
 
-// const usersRouter = require('./UsersRouter');
+const TasksRouter = require('./TasksRouter');
 
-// mainRoutes.use('/users', usersRouter);
+MainRoutes.use('/tasks', TasksRouter);
 
-module.exports = mainRoutes;
+module.exports = MainRoutes;
