@@ -14,17 +14,17 @@ describe('Testa update', () => {
   const id = '620aa97466edc7d67e2865f3';
   const task = {
     _id: ObjectId(id),
-    task: 'Testar back-end',
+    activity: 'Testar back-end',
     status: 'Pendente',
   };
 
   const updatedTask = {
     _id: ObjectId(id),
-    task: 'Testar front-end',
+    activity: 'Testar front-end',
     status: 'Completa',
   };
 
-  describe('Quando não há tarefa no corpo da requisição', () => {
+  describe('Quando não há atividade no corpo da requisição', () => {
     let response = {};
     let taskData = {};
 
@@ -52,11 +52,11 @@ describe('Testa update', () => {
   
     it('Retorna a mensagem de erro correta', () => {
       expect(response).to.have.status(400);
-      expect(response.body).to.be.equal('"task" is required');
+      expect(response.body).to.be.equal('"activity" is required');
     });
   });
 
-  describe('Quando a tarefa está vazia', () => {
+  describe('Quando a atividade está vazia', () => {
     let response = {};
     let taskData = {};
 
@@ -67,7 +67,7 @@ describe('Testa update', () => {
       await connectionMock.collection('tasks').insertOne(task);
 
       response = await chai.request(server).put(`/tasks/${id}`)
-        .send({ task: '', status: updatedTask.status });
+        .send({ activity: '', status: updatedTask.status });
 
       taskData = await connectionMock.collection('tasks')
         .findOne({ status: updatedTask.status });
@@ -84,7 +84,7 @@ describe('Testa update', () => {
   
     it('Retorna a mensagem de erro correta', () => {
       expect(response).to.have.status(400);
-      expect(response.body).to.be.equal('"task" is not allowed to be empty');
+      expect(response.body).to.be.equal('"activity" is not allowed to be empty');
     });
   });
 
@@ -99,10 +99,10 @@ describe('Testa update', () => {
       await connectionMock.collection('tasks').insertOne(task);
 
       response = await chai.request(server).put(`/tasks/${id}`)
-        .send({ task: updatedTask.task });
+        .send({ activity: updatedTask.activity });
 
       taskData = await connectionMock.collection('tasks')
-        .findOne({ task: updatedTask.task });
+        .findOne({ activity: updatedTask.activity });
     });
 
     after(async () => {
@@ -131,10 +131,10 @@ describe('Testa update', () => {
       await connectionMock.collection('tasks').insertOne(task);
 
       response = await chai.request(server).put(`/tasks/${id}`)
-        .send({ task: updatedTask.task, status: '' });
+        .send({ activity: updatedTask.activity, status: '' });
 
       taskData = await connectionMock.collection('tasks')
-        .findOne({ task: updatedTask.task });
+        .findOne({ activity: updatedTask.activity });
     });
 
     after(async () => {
@@ -163,10 +163,10 @@ describe('Testa update', () => {
       await connectionMock.collection('tasks').insertOne(task);
 
       response = await chai.request(server).put(`/tasks/${id}`)
-        .send({ task: updatedTask.task, status: updatedTask.status });
+        .send({ activity: updatedTask.activity, status: updatedTask.status });
 
       taskData = await connectionMock.collection('tasks')
-        .findOne({ task: updatedTask.task });
+        .findOne({ activity: updatedTask.activity });
     });
 
     after(async () => {

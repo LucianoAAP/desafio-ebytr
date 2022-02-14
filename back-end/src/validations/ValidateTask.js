@@ -1,7 +1,7 @@
 const joi = require('joi');
 
 const schema = joi.object().keys({
-  task: joi.string().empty(false).required().max(300),
+  activity: joi.string().empty(false).required().max(300),
   status: joi.string().empty(false).required().max(50),
 });
 

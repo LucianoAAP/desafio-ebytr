@@ -14,7 +14,7 @@ describe('Testa remove', () => {
   const id = '620aa97466edc7d67e2865f3';
   const task = {
     _id: ObjectId(id),
-    task: 'Testar back-end',
+    activity: 'Testar back-end',
     status: 'Pendente',
   };
 
@@ -51,7 +51,7 @@ describe('Testa remove', () => {
 
       response = await chai.request(server).delete(`/tasks/${id}`);
 
-      missingTask = await connectionMock.collection('tasks').findOne({ task: task.task });
+      missingTask = await connectionMock.collection('tasks').findOne({ activity: task.activity });
     });
 
     after(async () => {

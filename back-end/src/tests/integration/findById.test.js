@@ -14,7 +14,7 @@ describe('Testa findById', () => {
   const id = '620aa97466edc7d67e2865f3';
   const task = {
     _id: ObjectId(id),
-    task: 'Testar back-end',
+    activity: 'Testar back-end',
     status: 'Pendente',
   };
 

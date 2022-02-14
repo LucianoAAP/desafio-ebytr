@@ -11,11 +11,11 @@ const { expect } = chai;
 
 describe('Testa create', () => {
   const task = {
-    task: 'Testar back-end',
+    activity: 'Testar back-end',
     status: 'Pendente',
   };
 
-  describe('Quando não há tarefa no corpo da requisição', () => {
+  describe('Quando não há atividade no corpo da requisição', () => {
     let response = {};
     let createdTask = {};
 
@@ -39,11 +39,11 @@ describe('Testa create', () => {
   
     it('Retorna a mensagem de erro correta', () => {
       expect(response).to.have.status(400);
-      expect(response.body).to.be.equal('"task" is required');
+      expect(response.body).to.be.equal('"activity" is required');
     });
   });
 
-  describe('Quando a tarefa está vazia', () => {
+  describe('Quando a atividade está vazia', () => {
     let response = {};
     let createdTask = {};
 
@@ -52,7 +52,7 @@ describe('Testa create', () => {
       sinon.stub(mongoConnection, 'connect').resolves(connectionMock);
 
       response = await chai.request(server).post('/tasks')
-        .send({ task: '', status: task.status });
+        .send({ activity: '', status: task.status });
 
       createdTask = await connectionMock.collection('tasks').findOne({ status: task.status });
     });
@@ -68,7 +68,7 @@ describe('Testa create', () => {
   
     it('Retorna a mensagem de erro correta', () => {
       expect(response).to.have.status(400);
-      expect(response.body).to.be.equal('"task" is not allowed to be empty');
+      expect(response.body).to.be.equal('"activity" is not allowed to be empty');
     });
   });
 
@@ -80,9 +80,11 @@ describe('Testa create', () => {
       const connectionMock = await getConnection().then((conn) => conn.db('Ebytr'));
       sinon.stub(mongoConnection, 'connect').resolves(connectionMock);
 
-      response = await chai.request(server).post('/tasks').send({ task: task.task });
+      response = await chai.request(server).post('/tasks')
+        .send({ activity: task.activity });
 
-      createdTask = await connectionMock.collection('tasks').findOne({ task: task.task });
+      createdTask = await connectionMock.collection('tasks')
+        .findOne({ activity: task.activity });
     });
 
     after(async () => {
@@ -109,9 +111,10 @@ describe('Testa create', () => {
       sinon.stub(mongoConnection, 'connect').resolves(connectionMock);
 
       response = await chai.request(server).post('/tasks')
-        .send({ task: task.task, status: '' });
+        .send({ activity: task.activity, status: '' });
 
-      createdTask = await connectionMock.collection('tasks').findOne({ task: task.task });
+      createdTask = await connectionMock.collection('tasks')
+        .findOne({ activity: task.activity });
     });
 
     after(async () => {
@@ -139,7 +142,8 @@ describe('Testa create', () => {
 
       response = await chai.request(server).post('/tasks').send(task);
 
-      createdTask = await connectionMock.collection('tasks').findOne({ task: task.task });
+      createdTask = await connectionMock.collection('tasks')
+        .findOne({ activity: task.activity });
     });
 
     after(async () => {
@@ -154,8 +158,8 @@ describe('Testa create', () => {
     it('Retorna a resposta correta', () => {
       expect(response).to.have.status(201);
       expect(response.body).to.be.an('object');
-      expect(response.body).to.have.property('task');
-      expect(response.body.task).to.be.equal(task.task);
+      expect(response.body).to.have.property('activity');
+      expect(response.body.activity).to.be.equal(task.activity);
       expect(response.body).to.have.property('status');
       expect(response.body.status).to.be.equal(task.status);
     });
