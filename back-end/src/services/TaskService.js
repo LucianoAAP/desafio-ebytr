@@ -1,5 +1,6 @@
 const TasksModel = require('../models/TasksModel');
-const { notFound } = require('../error/apiError');
+const { notFound, badRequest } = require('../error/apiError');
+const validateTask = require('../validations/ValidateTask');
 
 const findAll = async () => TasksModel.findAll();
 
@@ -9,9 +10,15 @@ const findById = async () => {
   return task;
 };
 
-const create = async (entries) => TasksModel.create(entries);
+const create = async (entries) => {
+  const error = validateTask(entries);
+  if (error) return badRequest(error);
+  return await TasksModel.create(entries);
+};
 
 const update = async (id, entries) => {
+  const error = validateTask(entries);
+  if (error) return badRequest(error);
   const task = await TasksModel.findById(id);
   if (!task) return notFound('Task does not exist');
   return TasksModel.update(id, entries);
