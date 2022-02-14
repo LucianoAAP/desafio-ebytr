@@ -12,12 +12,12 @@ const findById = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const task = TasksService.create(req.body);
+  const task = await TasksService.create(req.body);
   return res.status(CREATED).json(task);
 };
 
 const update = async (req, res) => {
-  const task = TasksService.update(req.params.id, req.body);
+  const task = await TasksService.update(req.params.id, req.body);
   return res.status(OK).json(task);
 };
 

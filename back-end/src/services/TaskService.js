@@ -4,7 +4,7 @@ const validateTask = require('../validations/ValidateTask');
 
 const findAll = async () => TasksModel.findAll();
 
-const findById = async () => {
+const findById = async (id) => {
   const task = await TasksModel.findById(id);
   if (!task) return notFound('Task does not exist');
   return task;
