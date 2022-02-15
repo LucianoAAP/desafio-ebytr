@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NewTaskForm, TaskList } from '../components';
-import { getTasks } from '../services/tasksApi';
+import { getTasks, createTask } from '../services/tasksApi';
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,6 +14,22 @@ const TasksPage = () => {
       setSortedTasks(result);
     });
   }, []);
+
+  useEffect(() => {
+    const MINUS_ONE = -1;
+
+    const newTasks = tasks.sort((a, b) => {
+      const first = a[sorting].toLowerCase();
+      const second = b[sorting].toLowerCase();
+      if (first < second) return MINUS_ONE;
+      if (first > second) return 1;
+      return 0;
+    });
+
+    const orderedTasks = ordering === 'desc' ? newTasks.reverse() : newTasks;
+
+    setSortedTasks(orderedTasks);
+  }, [tasks, sorting, ordering]);
 
   const handleSorting = async (sortingCriterium, orderCriterium) => {
     const MINUS_ONE = -1;
@@ -32,10 +48,16 @@ const TasksPage = () => {
     setSortedTasks(orderedTasks);
   };
 
+  const addTask = (task) => {
+    const newTasks = [...tasks, { ...task, dateCreated: new Date().toString() }];
+    setTasks(newTasks);
+    createTask(task);
+  };
+
   return (
     <main className="container">
       <h1>Tarefas da Ebytr</h1>
-      <NewTaskForm />
+      <NewTaskForm addTask={ addTask } />
       <TaskList
         tasks={ sortedTasks }
         sorting={ sorting }

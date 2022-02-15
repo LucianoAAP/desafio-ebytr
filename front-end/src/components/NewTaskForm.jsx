@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const TaskForm = () => {
+const TaskForm = ({ addTask }) => {
   const [activity, setActivity] = useState('');
   const [status, setStatus] = useState('Pendente');
+
+  const handleAddTask = () => {
+    addTask({ activity, status });
+    setActivity('');
+    setStatus('Pendente');
+  };
 
   return (
     <form className="new-task-form">
@@ -32,11 +39,16 @@ const TaskForm = () => {
         type="button"
         className="add-task-button"
         disabled={ activity === '' }
+        onClick={ handleAddTask }
       >
         Adicionar
       </button>
     </form>
   );
+};
+
+TaskForm.propTypes = {
+  addTask: PropTypes.func.isRequired,
 };
 
 export default TaskForm;

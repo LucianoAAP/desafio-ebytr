@@ -55,8 +55,8 @@ const TaskList = ({ tasks, sorting, ordering, handleSorting }) => {
         </thead>
         <tbody>
           {
-            tasks.map((task) => (
-              <tr key={ task.id }>
+            tasks.map((task, index) => (
+              <tr key={ index }>
                 <td>{ task.activity }</td>
                 <td>{ task.status }</td>
                 <td>{ getDate(task.dateCreated) }</td>
@@ -75,7 +75,6 @@ const TaskList = ({ tasks, sorting, ordering, handleSorting }) => {
 
 TaskList.propTypes = {
   tasks: arrayOf(shape({
-    id: string.isRequired,
     activity: string.isRequired,
     status: string.isRequired,
     dateCreated: string.isRequired,
