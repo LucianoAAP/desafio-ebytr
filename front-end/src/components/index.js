@@ -1,4 +1,4 @@
-// export { default as NewTaskForm } from './NewTaskForm';
 import NewTaskForm from './NewTaskForm';
+import TaskList from './TaskList';
 
-export default NewTaskForm;
+export { NewTaskForm, TaskList };

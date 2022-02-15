@@ -1,10 +1,12 @@
 import React from 'react';
-import NewTaskForm from '../components';
+import { NewTaskForm, TaskList } from '../components';
 
 const TasksPage = () => (
-  <div>
+  <main className="container">
+    <h1>Tarefas da Ebytr</h1>
     <NewTaskForm />
-  </div>
+    <TaskList />
+  </main>
 );
 
 export default TasksPage;

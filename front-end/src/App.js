@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import TasksPage from './pages/TasksPage';
+import './App.css';
 
 const App = () => (
   <Routes>

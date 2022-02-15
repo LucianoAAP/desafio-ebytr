@@ -5,20 +5,22 @@ const TaskForm = () => {
   const [status, setStatus] = useState('Pendente');
 
   return (
-    <form>
-      <label htmlFor="activity-input">
-        Tarefa:
+    <form className="new-task-form">
+      <label htmlFor="activity-input" className="new-task-label">
+        Nova tarefa:
         <input
           name="activity-input"
           type="text"
+          className="task-input"
           value={ activity }
           onChange={ ({ target: { value } }) => setActivity(value) }
         />
       </label>
-      <label htmlFor="status">
+      <label htmlFor="status" className="new-task-label">
         Status:
         <select
           name="status"
+          className="status-select"
           value={ status }
           onChange={ ({ target: { value } }) => setStatus(value) }
         >
@@ -26,7 +28,13 @@ const TaskForm = () => {
           <option value="Concluído">Concluído</option>
         </select>
       </label>
-      <button type="button" disabled={ activity === '' }>Adicionar</button>
+      <button
+        type="button"
+        className="add-task-button"
+        disabled={ activity === '' }
+      >
+        Adicionar
+      </button>
     </form>
   );
 };
