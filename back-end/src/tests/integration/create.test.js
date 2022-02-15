@@ -162,6 +162,7 @@ describe('Testa create', () => {
       expect(response.body.activity).to.be.equal(task.activity);
       expect(response.body).to.have.property('status');
       expect(response.body.status).to.be.equal(task.status);
+      expect(response.body).to.have.property('dateCreated');
     });
   });
 });

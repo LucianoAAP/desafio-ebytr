@@ -16,6 +16,7 @@ describe('Testa remove', () => {
     _id: ObjectId(id),
     activity: 'Testar back-end',
     status: 'Pendente',
+    dateCreated: '2022-02-15T00:26:48.144Z',
   };
 
   describe('Quando a tarefa não existe', () => {

@@ -12,9 +12,10 @@ const findById = async (id) => {
   return { _id: id, ...task };
 };
 
-const create = async ({ activity, status }) => (connection.connect()
-  .then((db) => db.collection('tasks').insertOne({ activity, status }))
-  .then((result) => ({ activity, status, _id: result.insertedId })));
+const create = async ({ activity, status, dateCreated = new Date() }) => (
+  connection.connect()
+  .then((db) => db.collection('tasks').insertOne({ activity, status, dateCreated }))
+  .then((result) => ({ activity, status, dateCreated, _id: result.insertedId })));
 
 const update = async (id, entries) => {
   await connection.connect().then((db) => db.collection('tasks').updateOne(

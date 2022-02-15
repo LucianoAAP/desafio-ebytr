@@ -1,9 +1,9 @@
 import React from 'react';
-import TaskForm from '../components';
+import NewTaskForm from '../components';
 
 const TasksPage = () => (
   <div>
-    <TaskForm />
+    <NewTaskForm />
   </div>
 );
 

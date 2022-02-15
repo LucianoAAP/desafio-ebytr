@@ -2,12 +2,19 @@ const TasksModel = require('../models/TasksModel');
 const { notFound, badRequest } = require('../error/apiError');
 const validateTask = require('../validations/ValidateTask');
 
-const findAll = async () => TasksModel.findAll();
+const formatTask = ({ _id, ...task }) => ({ id: _id, ...task });
+
+const findAll = async () => {
+  const tasks = await TasksModel.findAll();
+  const formatedTasks = tasks.map(formatTask);
+  return formatedTasks;
+};
 
 const findById = async (id) => {
   const task = await TasksModel.findById(id);
   if (!task) return notFound('Task does not exist');
-  return task;
+  const formatedTask = formatTask(task);
+  return formatedTask;
 };
 
 const create = async (entries) => {

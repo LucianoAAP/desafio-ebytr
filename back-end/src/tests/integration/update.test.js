@@ -16,12 +16,14 @@ describe('Testa update', () => {
     _id: ObjectId(id),
     activity: 'Testar back-end',
     status: 'Pendente',
+    dateCreated: '2022-02-15T00:26:48.144Z',
   };
 
   const updatedTask = {
     _id: ObjectId(id),
     activity: 'Testar front-end',
-    status: 'Completa',
+    status: 'Concluído',
+    dateCreated: '2022-02-15T00:26:48.144Z',
   };
 
   describe('Quando não há atividade no corpo da requisição', () => {
