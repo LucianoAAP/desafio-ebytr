@@ -9,7 +9,7 @@ const TaskForm = () => {
       <label htmlFor="activity-input" className="new-task-label">
         Nova tarefa:
         <input
-          name="activity-input"
+          id="activity-input"
           type="text"
           className="task-input"
           value={ activity }
@@ -19,7 +19,7 @@ const TaskForm = () => {
       <label htmlFor="status" className="new-task-label">
         Status:
         <select
-          name="status"
+          id="status"
           className="status-select"
           value={ status }
           onChange={ ({ target: { value } }) => setStatus(value) }
