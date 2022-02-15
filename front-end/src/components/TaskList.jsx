@@ -1,42 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { getTasks } from '../services/tasksApi';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const MINUS_ONE = -1;
+const { arrayOf, shape, string, func } = PropTypes;
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-  const [sortedTasks, setSortedTasks] = useState([]);
-  const [sorting, setSorting] = useState('activity');
-  const [ordering, setOrdering] = useState('asc');
-
-  useEffect(() => {
-    getTasks().then((result) => {
-      setTasks(result);
-      setSortedTasks(result);
-    });
-  }, []);
-
-  const handleSorting = async (sortingCriterium, orderCriterium) => {
-    setSorting(sortingCriterium);
-    setOrdering(orderCriterium);
-    const newTasks = tasks.sort((a, b) => {
-      const first = a[sortingCriterium].toLowerCase();
-      const second = b[sortingCriterium].toLowerCase();
-      if (first < second) return MINUS_ONE;
-      if (first > second) return 1;
-      return 0;
-    });
-
-    const orderedTasks = orderCriterium === 'desc' ? newTasks.reverse() : newTasks;
-
-    setSortedTasks(orderedTasks);
-  };
-
-  // const handleOrdering = async ({ target: { value } }) => {
-  //   setOrdering(value);
-  //   handleSorting(sorting);
-  // };
-
+const TaskList = ({ tasks, sorting, ordering, handleSorting }) => {
   const getDate = (dateTime) => new Date(dateTime).toLocaleDateString('pt-BR');
 
   return (
@@ -46,6 +13,7 @@ const TaskList = () => {
           Ordenar por:
           <select
             id="sorter"
+            className="sorting-select"
             value={ sorting }
             onChange={ ({ target: { value } }) => handleSorting(value, ordering) }
           >
@@ -87,7 +55,7 @@ const TaskList = () => {
         </thead>
         <tbody>
           {
-            sortedTasks.map((task) => (
+            tasks.map((task) => (
               <tr key={ task.id }>
                 <td>{ task.activity }</td>
                 <td>{ task.status }</td>
@@ -103,6 +71,18 @@ const TaskList = () => {
       </table>
     </div>
   );
+};
+
+TaskList.propTypes = {
+  tasks: arrayOf(shape({
+    id: string.isRequired,
+    activity: string.isRequired,
+    status: string.isRequired,
+    dateCreated: string.isRequired,
+  })).isRequired,
+  sorting: string.isRequired,
+  ordering: string.isRequired,
+  handleSorting: func.isRequired,
 };
 
 export default TaskList;
