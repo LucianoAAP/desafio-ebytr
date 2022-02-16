@@ -37,7 +37,6 @@ const TaskForm = ({ addTask }) => {
       </label>
       <button
         type="button"
-        className="add-task-button"
         disabled={ activity === '' }
         onClick={ handleAddTask }
       >

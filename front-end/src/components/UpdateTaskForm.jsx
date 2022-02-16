@@ -19,6 +19,12 @@ const TaskForm = ({ task, editTask, toggleEditing }) => {
     toggleEditing(false);
   };
 
+  const handleCancel = () => {
+    setActivity('');
+    setStatus('Pendente');
+    toggleEditing(false);
+  };
+
   return (
     <form className="new-task-form">
       <label htmlFor="activity-input" className="new-task-label">
@@ -45,11 +51,16 @@ const TaskForm = ({ task, editTask, toggleEditing }) => {
       </label>
       <button
         type="button"
-        className="add-task-button"
         disabled={ activity === '' }
         onClick={ handleEditTask }
       >
         Atualizar
+      </button>
+      <button
+        type="button"
+        onClick={ handleCancel }
+      >
+        Cancelar
       </button>
     </form>
   );
