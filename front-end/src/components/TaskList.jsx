@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const { arrayOf, shape, string, func } = PropTypes;
 
-const TaskList = ({ tasks, sorting, ordering, handleSorting }) => {
+const TaskList = ({ tasks, sorting, ordering, handleSorting, handleRemoveTask }) => {
   const getDate = (dateTime) => new Date(dateTime).toLocaleDateString('pt-BR');
 
   return (
@@ -62,7 +62,12 @@ const TaskList = ({ tasks, sorting, ordering, handleSorting }) => {
                 <td>{ getDate(task.dateCreated) }</td>
                 <td>
                   <button type="button">Editar</button>
-                  <button type="button">Remover</button>
+                  <button
+                    type="button"
+                    onClick={ () => handleRemoveTask(task.id) }
+                  >
+                    Remover
+                  </button>
                 </td>
               </tr>
             ))
@@ -83,6 +88,7 @@ TaskList.propTypes = {
   sorting: string.isRequired,
   ordering: string.isRequired,
   handleSorting: func.isRequired,
+  handleRemoveTask: func.isRequired,
 };
 
 export default TaskList;

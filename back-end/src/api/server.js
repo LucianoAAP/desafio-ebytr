@@ -17,4 +17,4 @@ socketListener(io);
 
 const PORT = process.env.PORT || 3001;
 
-server.listen(PORT, () => console.log(`conectado na porta ${PORT}`));
+server.listen(PORT, () => console.log(`Conectado na porta ${PORT}`));
