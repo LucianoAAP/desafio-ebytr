@@ -52,7 +52,7 @@ describe('Testa remove', () => {
 
       response = await chai.request(server).delete(`/tasks/${id}`);
 
-      missingTask = await connectionMock.collection('tasks').findOne({ activity: task.activity });
+      missingTask = await connectionMock.collection('tasks').findOne(ObjectId(id));
     });
 
     after(async () => {

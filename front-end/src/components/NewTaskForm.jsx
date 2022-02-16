@@ -32,6 +32,7 @@ const TaskForm = ({ addTask }) => {
           onChange={ ({ target: { value } }) => setStatus(value) }
         >
           <option value="Pendente">Pendente</option>
+          <option value="Em andamento">Em andamento</option>
           <option value="Concluído">Concluído</option>
         </select>
       </label>
