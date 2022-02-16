@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import axios from 'axios';
-// import io from 'socket.io-client';
 import { tasks } from './mocks';
 
 jest.mock('socket.io-client', () => jest.fn(() => ({
@@ -15,8 +14,8 @@ jest.mock('socket.io-client', () => jest.fn(() => ({
 describe('Testa página de tarefas', () => {
   describe('Testa renderização dos componentes iniciais', () => {
     beforeEach(() => {
-      const axiosGetMock = jest.spyOn(axios, "get");
-      axiosGetMock.mockResolvedValue({ data: tasks});
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      axiosGetMock.mockResolvedValue({ data: tasks });
     });
 
     it('Renderiza os componentes', async () => {
@@ -26,8 +25,8 @@ describe('Testa página de tarefas', () => {
       expect(title).toBeInTheDocument();
       const newTaskInput = screen.getByLabelText('Nova tarefa:');
       expect(newTaskInput).toBeInTheDocument();
-      const statusInput = screen.getByLabelText('Status:');
-      expect(statusInput).toBeInTheDocument();
+      const statusSelect = screen.getByLabelText('Status:');
+      expect(statusSelect).toBeInTheDocument();
       const addButton = screen.getByText('Adicionar');
       expect(addButton).toBeInTheDocument();
       const sortingInput = screen.getByLabelText('Ordenar por:');
@@ -71,8 +70,8 @@ describe('Testa página de tarefas', () => {
 
   describe('Testa o formulário de edição', () => {
     beforeEach(() => {
-      const axiosGetMock = jest.spyOn(axios, "get");
-      axiosGetMock.mockResolvedValue({ data: tasks});
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      axiosGetMock.mockResolvedValue({ data: tasks });
     });
 
     it('Renderiza o formulário', async () => {
@@ -81,8 +80,8 @@ describe('Testa página de tarefas', () => {
       userEvent.click(editButtons[1]);
       const editTaskInput = screen.getByLabelText('Editar tarefa:');
       expect(editTaskInput).toBeInTheDocument();
-      const statusInput = screen.getByLabelText('Status:');
-      expect(statusInput).toBeInTheDocument();
+      const statusSelect = screen.getByLabelText('Status:');
+      expect(statusSelect).toBeInTheDocument();
       const updateButton = screen.getByText('Atualizar');
       expect(updateButton).toBeInTheDocument();
       const cancelButton = screen.getByText('Cancelar');
@@ -105,6 +104,64 @@ describe('Testa página de tarefas', () => {
       expect(cancelButton).toBeInTheDocument();
       userEvent.click(cancelButton);
       expect(cancelButton).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Testa criação de tarefas', () => {
+    beforeEach(() => {
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      const axiosPostMock = jest.spyOn(axios, 'post');
+      axiosGetMock.mockResolvedValue({ data: tasks });
+      axiosPostMock.mockResolvedValue({ data: {} });
+    });
+
+    it('Botão faz chamada à API', () => {
+      renderWithRouter(<App />);
+      const newTaskInput = screen.getByLabelText('Nova tarefa:');
+      const statusSelect = screen.getByLabelText('Status:');
+      const addButton = screen.getByText('Adicionar');
+      userEvent.type(newTaskInput, 'Criar tarefa');
+      userEvent.selectOptions(statusSelect, 'Em andamento');
+      userEvent.click(addButton);
+      expect(axios.post).toHaveBeenCalled();
+    });
+  });
+
+  describe('Testa edição de tarefas', () => {
+    beforeEach(() => {
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      const axiosPutMock = jest.spyOn(axios, 'put');
+      axiosGetMock.mockResolvedValue({ data: tasks });
+      axiosPutMock.mockResolvedValue({ data: {} });
+    });
+
+    it('Botão faz chamada à API', async () => {
+      renderWithRouter(<App />);
+      const editButtons = await screen.findAllByRole('button', { name: /Editar/ });
+      userEvent.click(editButtons[0]);
+      const editTaskInput = screen.getByLabelText('Editar tarefa:');
+      const statusSelect = screen.getByLabelText('Status:');
+      const updateButton = screen.getByText('Atualizar');
+      userEvent.type(editTaskInput, 'atualizando');
+      userEvent.selectOptions(statusSelect, 'Em andamento');
+      userEvent.click(updateButton);
+      expect(axios.put).toHaveBeenCalled();
+    });
+  });
+
+  describe('Testa remoção de tarefas', () => {
+    beforeEach(() => {
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      const axiosDeleteMock = jest.spyOn(axios, 'delete');
+      axiosGetMock.mockResolvedValue({ data: tasks });
+      axiosDeleteMock.mockResolvedValue({ data: {} });
+    });
+
+    it('Botão faz chamada à API', async () => {
+      renderWithRouter(<App />);
+      const removeButtons = await screen.findAllByRole('button', { name: /Remover/ });
+      userEvent.click(removeButtons[0]);
+      expect(axios.delete).toHaveBeenCalled();
     });
   });
 });

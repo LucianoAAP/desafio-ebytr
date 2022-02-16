@@ -57,9 +57,9 @@ const TaskList = (
         </thead>
         <tbody>
           {
-            tasks.map((task) => (
+            tasks.map((task, index) => (
               <tr key={ task.id }>
-                <td>{ task.activity }</td>
+                <td data-testid={ `activity-${index}` }>{ task.activity }</td>
                 <td>{ task.status }</td>
                 <td>{ getDate(task.dateCreated) }</td>
                 <td>
