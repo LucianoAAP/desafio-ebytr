@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 import { NewTaskForm, TaskList } from '../components';
 import { getTasks, createTask } from '../services/tasksApi';
 
@@ -7,6 +8,13 @@ const TasksPage = () => {
   const [sortedTasks, setSortedTasks] = useState([]);
   const [sorting, setSorting] = useState('activity');
   const [ordering, setOrdering] = useState('asc');
+
+  const socket = io('http://localhost:3001');
+  socket.on('tasksUpdated', () => {
+    getTasks().then((result) => {
+      setTasks(result);
+    });
+  });
 
   useEffect(() => {
     getTasks().then((result) => {
@@ -48,10 +56,9 @@ const TasksPage = () => {
     setSortedTasks(orderedTasks);
   };
 
-  const addTask = (task) => {
-    const newTasks = [...tasks, { ...task, dateCreated: new Date().toString() }];
-    setTasks(newTasks);
-    createTask(task);
+  const addTask = async (task) => {
+    await createTask(task);
+    socket.emit('tasksUpdated');
   };
 
   return (
