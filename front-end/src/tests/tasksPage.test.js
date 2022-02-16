@@ -29,8 +29,8 @@ describe('Testa página de tarefas', () => {
       expect(statusSelect).toBeInTheDocument();
       const addButton = screen.getByText('Adicionar');
       expect(addButton).toBeInTheDocument();
-      const sortingInput = screen.getByLabelText('Ordenar por:');
-      expect(sortingInput).toBeInTheDocument();
+      const sortingSelect = screen.getByLabelText('Ordenar por:');
+      expect(sortingSelect).toBeInTheDocument();
       const ascRadio = screen.getByLabelText('Asc');
       expect(ascRadio).toBeInTheDocument();
       const descRadio = screen.getByLabelText('Desc');
@@ -162,6 +162,51 @@ describe('Testa página de tarefas', () => {
       const removeButtons = await screen.findAllByRole('button', { name: /Remover/ });
       userEvent.click(removeButtons[0]);
       expect(axios.delete).toHaveBeenCalled();
+    });
+  });
+
+  describe('Testa ordenação das tarefas', () => {
+    beforeEach(() => {
+      const axiosGetMock = jest.spyOn(axios, 'get');
+      axiosGetMock.mockResolvedValue({ data: tasks });
+    });
+
+    it('Select ordena de acordo com a categoria', async () => {
+      renderWithRouter(<App />);
+      const firstActivity = await screen.findByText('Fazer deploy');
+      expect(firstActivity).toBeInTheDocument();
+      const sortingSelect = screen.getByLabelText('Ordenar por:');
+      userEvent.selectOptions(sortingSelect, 'Status');
+      const firstTask = screen.getByTestId('activity-0');
+      expect(firstTask.innerHTML).toBe('Testar front-end');
+      const secondTask = screen.getByTestId('activity-1');
+      expect(secondTask.innerHTML).toBe('Fazer deploy');
+      const thirdTask = screen.getByTestId('activity-2');
+      expect(thirdTask.innerHTML).toBe('Testar back-end');
+    });
+
+    it('Botões radio invertem a ordenação', async () => {
+      renderWithRouter(<App />);
+      const firstActivity = await screen.findByText('Fazer deploy');
+      expect(firstActivity).toBeInTheDocument();
+      const sortingSelect = screen.getByLabelText('Ordenar por:');
+      const ascRadio = screen.getByLabelText('Asc');
+      const descRadio = screen.getByLabelText('Desc');
+      userEvent.selectOptions(sortingSelect, 'Status');
+      userEvent.click(descRadio);
+      const firstTask = screen.getByTestId('activity-0');
+      expect(firstTask.innerHTML).toBe('Testar back-end');
+      const secondTask = screen.getByTestId('activity-1');
+      expect(secondTask.innerHTML).toBe('Fazer deploy');
+      const thirdTask = screen.getByTestId('activity-2');
+      expect(thirdTask.innerHTML).toBe('Testar front-end');
+      userEvent.click(ascRadio);
+      const newFirstTask = screen.getByTestId('activity-0');
+      expect(newFirstTask.innerHTML).toBe('Testar front-end');
+      const newSecondTask = screen.getByTestId('activity-1');
+      expect(newSecondTask.innerHTML).toBe('Fazer deploy');
+      const newThirdTask = screen.getByTestId('activity-2');
+      expect(newThirdTask.innerHTML).toBe('Testar back-end');
     });
   });
 });
