@@ -1,6 +1,6 @@
 # O projeto
 
-Este é um projeto desenvolvido para o desafio técnico da Ebytr. Se trata de uma aplicação de lista de tarefas para ajudar os membros da empresa a se organizarem melhor e aumentarem sua produtividade.
+Este é um projeto desenvolvido para o desafio técnico da Ebytr. Se trata de uma aplicação de lista de tarefas, utilizando a stack MERN (MongoDB, Express, React e Node), para ajudar os membros da empresa a se organizarem melhor e aumentarem sua produtividade.
 
 # Funcionalidades
 
@@ -67,7 +67,7 @@ Este projeto requer o pacote "NPM" e "MongoDB"
 # Próximos passos
 
 - Criar uma API de usuários
-- Atribuir as tarefas aos trabalhadores da empresa
+- Atribuir as tarefas aos funcionários da empresa
 - Deploy no Heroku
 
 # Contato

@@ -25,7 +25,7 @@ const TaskList = (
           </select>
         </label>
         <label htmlFor="asc">
-          Asc:
+          Asc
           <input
             id="asc"
             name="ordering"
@@ -36,7 +36,7 @@ const TaskList = (
           />
         </label>
         <label htmlFor="desc">
-          Desc:
+          Desc
           <input
             id="desc"
             name="ordering"

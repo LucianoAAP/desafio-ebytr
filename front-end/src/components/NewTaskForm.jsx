@@ -33,7 +33,7 @@ const TaskForm = ({ addTask }) => {
         >
           <option value="Pendente">Pendente</option>
           <option value="Em andamento">Em andamento</option>
-          <option value="Concluído">Concluído</option>
+          <option value="Pronto">Pronto</option>
         </select>
       </label>
       <button
