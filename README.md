@@ -1,10 +1,11 @@
 # O projeto
 
-Este é um projeto desenvolvido para o desafio técnico da Ebytr. Se trata de uma aplicação de lista de tarefas, utilizando a stack MERN (MongoDB, Express, React e Node), para ajudar os membros da empresa a se organizarem melhor e aumentarem sua produtividade.
+Este é um projeto desenvolvido para o desafio técnico da empresa fictícia Ebytr. Se trata de uma aplicação de lista de tarefas, utilizando a stack MERN (MongoDB, Express, React e Node), para ajudar os membros da empresa a se organizarem melhor e aumentarem sua produtividade.
 
 # Funcionalidades
 
 - Tabela de tarefas
+- Ordenação de tarefas
 - Adicionar nova tarefa
 - Editar tarefa
 - Remover tarefa
