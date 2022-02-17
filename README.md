@@ -59,7 +59,7 @@ Este projeto requer o pacote "NPM" e "MongoDB"
 2. Inicie os testes:
 - `npm test`
 
-Para ver a cobertura, rode o comando `npm test: coverage`
+Para ver a cobertura, rode o comando `npm test:coverage`
 
 ## Testando o front-end
 
@@ -68,7 +68,7 @@ Para ver a cobertura, rode o comando `npm test: coverage`
 2. Inicie os testes:
 - `npm test`
 
-Para ver a cobertura, rode o comando `npm test: coverage`
+Para ver a cobertura, rode o comando `npm test:coverage`
 
 # Próximos passos
 
