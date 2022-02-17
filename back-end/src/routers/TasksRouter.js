@@ -5,7 +5,7 @@ const {
   findById,
   create,
   update,
-  remove
+  remove,
 } = require('../controllers/TasksController');
 
 TasksRouter.get('/', rescue(findAll));

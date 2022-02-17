@@ -7,7 +7,8 @@
     "start": "node .",
     "dev": "nodemon .",
     "test": "mocha ./src/tests/**/*$NAME*.{test,spec}.js --exit",
-    "test:coverage": "nyc --all npm run test"
+    "test:coverage": "nyc --all npm run test",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",

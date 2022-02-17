@@ -26,7 +26,6 @@ const update = async (id, entries) => {
 };
 
 const remove = async (id) => {
-  const task = await findById(id);
   await connection.connect()
     .then((db) => db.collection('tasks').deleteOne({ _id: ObjectId(id) }));
 };

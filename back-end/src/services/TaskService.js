@@ -20,7 +20,7 @@ const findById = async (id) => {
 const create = async (entries) => {
   const error = validateTask(entries);
   if (error) return badRequest(error);
-  return await TasksModel.create(entries);
+  return TasksModel.create(entries);
 };
 
 const update = async (id, entries) => {
