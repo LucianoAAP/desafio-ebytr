@@ -14,6 +14,10 @@
   margin-right: 10px;
 }
 
+.ordering-label {
+  margin: 5px;
+}
+
 .task-table {
   border-collapse: collapse;
   margin-top: 10px;
@@ -21,13 +25,13 @@
 }
 
 td {
-  border: 1px solid black;
+  border: 1px solid blue;
   padding: 5px;
   text-align: center;
 }
 
 th {
-  border: 1px solid black;
+  border: 1px solid blue;
   padding: 5px;
 }
 
@@ -51,4 +55,24 @@ th {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+button {
+  border-color: blue;
+  border-radius: 10px;
+  margin: 1px;
+}
+
+select, input {
+  border-color: blue;
+  border-radius: 10px;
+}
+
+.remove-button {
+  border-color: red;
+}
+
+h1 {
+  color: darkblue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

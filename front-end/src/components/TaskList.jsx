@@ -24,7 +24,7 @@ const TaskList = (
             <option value="dateCreated">Data de criação</option>
           </select>
         </label>
-        <label htmlFor="asc">
+        <label htmlFor="asc" className="ordering-label">
           Asc
           <input
             id="asc"
@@ -35,7 +35,7 @@ const TaskList = (
             onClick={ ({ target: { value } }) => handleSorting(sorting, value) }
           />
         </label>
-        <label htmlFor="desc">
+        <label htmlFor="desc" className="ordering-label">
           Desc
           <input
             id="desc"
@@ -71,6 +71,7 @@ const TaskList = (
                   </button>
                   <button
                     type="button"
+                    className="remove-button"
                     onClick={ () => handleRemoveTask(task.id) }
                   >
                     Remover

@@ -37,15 +37,17 @@ Este projeto requer o pacote "NPM" e "MongoDB"
 
 ## Iniciando a aplicação
 
-1. Começando na pasta principal, entre na pasta do back-end:
+1. Inicie o MongoDB:
+- `sudo service mongod start`
+2. Começando na pasta principal, entre na pasta do back-end:
 - `cd back-end`
-2. Inicie o back-end:
+3. Inicie o back-end:
 - `npm start`
-3. Volte para o repositório principal:
+4. Volte para o repositório principal:
 - `cd ..`
-4. Entre na pasta do front-end:
+5. Entre na pasta do front-end:
 - `cd front-end`
-5. Inicie o front-end:
+6. Inicie o front-end:
 - `npm start`
 
 # Testando a aplicação
@@ -57,12 +59,16 @@ Este projeto requer o pacote "NPM" e "MongoDB"
 2. Inicie os testes:
 - `npm test`
 
+Para ver a cobertura, rode o comando `npm test: coverage`
+
 ## Testando o front-end
 
 1. Começando na pasta principal, entre na pasta do back-end:
 - `cd front-end`
 2. Inicie os testes:
 - `npm test`
+
+Para ver a cobertura, rode o comando `npm test: coverage`
 
 # Próximos passos
 
