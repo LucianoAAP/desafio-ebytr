@@ -11,7 +11,7 @@ Este é um projeto desenvolvido para o desafio técnico da empresa fictícia Eby
 - Remover tarefa
 - Atualização em tempo real via socket
 - Testes de integração do back-end
-- Testes unitários do front-end
+- Testes do front-end
 
 # Iniciando
 
@@ -31,9 +31,9 @@ Este projeto requer o pacote "NPM" e "MongoDB"
 - `npm install`
 6. Volte para o repositório principal:
 - `cd ..`
-7. Entre na pasta do back-end:
+7. Entre na pasta do front-end:
 - `cd front-end`
-8. Instale as dependências do back-end:
+8. Instale as dependências do front-end:
 - `npm install`
 
 ## Iniciando a aplicação
