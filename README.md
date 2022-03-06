@@ -17,7 +17,7 @@ Este é um projeto desenvolvido para o desafio técnico da empresa fictícia Eby
 
 ## Pré-requisitos
 
-Este projeto requer o pacote "NPM" e "MongoDB"
+Esta aplicação requer o pacote "NPM" e "MongoDB"
 
 ## Instalação
 
