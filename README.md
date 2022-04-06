@@ -22,9 +22,9 @@ Esta aplicação requer o pacote "NPM" e "MongoDB"
 ## Instalação
 
 1. Primeiro, clone o repositório:
-- `git clone git@github.com:LucianoAAP/trybewallet.git`
+- `git clone git@github.com:LucianoAAP/desafio-ebytr.git`
 2. Depois, entre no repositório:
-- `cd Desafio-Ebytr`
+- `cd desafio-ebytr`
 3. Entre na pasta do back-end:
 - `cd back-end`
 5. Instale as dependências do back-end:
